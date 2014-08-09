@@ -1,0 +1,41 @@
+<ion-view title="Create Note">
+	<ion-content class="has-header">
+		<form 
+			name="createForm"
+			ng-submit="Notes.create()" >
+			<div class="list">
+				<label class="item item-input">
+				<input 
+					type="text" 
+					placeholder="Title"
+					ng-model="Notes.createForm.title">
+				</label>
+				<label class="item item-input">
+				<textarea 
+					placeholder="Content"
+					ng-model="Notes.createForm.note"></textarea>
+				</label>
+			</div>
+			<div class="padding">
+				<button 
+					type="button"
+					class="button button-positive" 
+					ng-click="Notes.addPhoto(Notes.createForm)">
+					<i class="icon ion-camera"></i>
+				</button>
+			</div>
+
+			<div class="row images" ng-repeat="image in Notes.createForm.pictures">
+				<div class="col">
+					<img ng-src="data:image/jpeg;base64,{{image}}">
+				</div>
+			</div>
+
+			<div class="padding">
+			  	<button class="button button-block button-positive">
+				 	Save
+				</button>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>

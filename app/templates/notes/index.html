@@ -1,0 +1,20 @@
+<ion-view title="Notes">
+	<ion-nav-buttons side="right">
+		<a class="button" href="#/tab/notes/create">
+			<i class="icon ion-plus-round"></i>
+		</a>
+	</ion-nav-buttons>
+
+	<ion-content class="has-header">
+		<ion-list>
+			<ion-item 
+			class="item-icon-right item-icon-left" 
+			type="item-text-wrap"
+			ng-repeat="note in Notes.items">
+				<a href="#/tab/notes/{{note.id}}" class="icon royal ion-compose"></a>
+				{{ note.title }}
+				<i class="icon ion-trash-a assertive" ng-click="Notes.remove(note)"></i>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

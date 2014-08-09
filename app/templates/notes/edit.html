@@ -1,0 +1,27 @@
+<ion-view title="Edit {{Notes.item.title}}">
+	<ion-content class="has-header">
+		<form 
+			name="createForm"
+			ng-submit="Notes.update()" >
+			<div class="list">
+				<label class="item item-input">
+				<input 
+					type="text" 
+					placeholder="Title"
+					ng-model="Notes.item.title">
+				</label>
+				<label class="item item-input">
+				<textarea 
+					placeholder="Content"
+					ng-model="Notes.item.note"></textarea>
+				</label>
+			</div>
+			<div class="padding">
+			  	<button
+			  		class="button button-block button-positive">
+				 	Save
+				</button>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>
