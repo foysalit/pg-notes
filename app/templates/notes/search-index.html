@@ -1,0 +1,22 @@
+<ion-view title="Search Notes">
+	<ion-content class="has-header">
+		<form 
+			name="searchForm"
+			ng-submit="Notes.search()" >
+			<div class="list">
+				<label class="item item-input">
+				<input 
+					type="text" 
+					placeholder="Search Query"
+					ng-model="Notes.searchForm.q">
+				</label>
+			</div>
+
+			<div class="padding">
+			  	<button class="button button-block button-positive">
+				 	Search
+				</button>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>

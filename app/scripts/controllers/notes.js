@@ -1,4 +1,8 @@
 'use strict';
+
+/*jshint curly: false */
+/*global _: true, Camera: true */
+
 angular
 .module('NoteToSelf.controllers', [])
 .controller('NotesController', function($rootScope, $scope, $location, $stateParams, $ionicPopup, NoteFactory) {
@@ -6,14 +10,17 @@ angular
 	self.factory = NoteFactory;
 
 	self.goHome = function () {
-		$location.path('/tab/notes')	
+		$location.path('/tab/notes');
 	};
 
-	if(!self.factory) return;
+	if(!self.factory)
+		return;
 
 	self.factory.getAll().then(function () {
 		self.items = self.factory.items;
 	});
+
+	self.searchResults = self.factory.searchResults;
 
 	if($stateParams.noteId){
 		self.factory.getOne($stateParams.noteId).then(function () {
@@ -34,7 +41,7 @@ angular
 
 	self.remove = function (params) {
 		if(_.isArray(params)){
-			self.factory.removeMultiple(params).then(self.goHome);	
+			self.factory.removeMultiple(params).then(self.goHome);
 		}else{
 			self.factory.removeOne(params).then(function () {
 				if($stateParams.noteId)
@@ -65,19 +72,18 @@ angular
 		});
 
 		alertPopup.then(function(res) {
-			console.log('photo popup shown!');
+			console.log('photo popup shown!', res);
 		});
 	};
 
 	self.addPhoto = function (formData) {
 		var title = 'Photo Upload result';
 
-		if(typeof Camera == 'undefined'){
-			self.showPopup(title, 'no camera');
-			return;
+		if(_.isUndefined(Camera)){
+			return self.showPopup(title, 'no camera');
 		}
 
-		var config = { 
+		var config = {
 			quality: 50,
 		    destinationType: Camera.DestinationType.DATA_URL,
 		    encodingType: Camera.EncodingType.JPEG,
@@ -89,9 +95,15 @@ angular
 		};
 
 		var photoFailed = function (err) {
-			self.showPopup(title, 'Photo processing error!');
+			self.showPopup(title, 'Photo processing error!', err);
 		};
 
 		navigator.camera.getPicture(photoAdded, photoFailed, config);
+	};
+
+	self.search = function () {
+		self.factory.search(self.searchForm).then(function () {
+			$location.path('/tab/notes/search/results');
+		});
 	};
 });

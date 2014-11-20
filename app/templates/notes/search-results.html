@@ -1,0 +1,24 @@
+<ion-view title="Search Results">
+	<ion-content class="has-header">
+		<ion-list>
+			<ion-item 
+			class="item-icon-right item-icon-left" 
+			type="item-text-wrap"
+			ng-repeat="note in Notes.searchResults">
+				<a href="#/tab/notes/{{note.id}}" class="icon royal ion-compose"></a>
+				{{ note.title }}
+				<i class="icon ion-trash-a assertive" ng-click="Notes.remove(note)"></i>
+			</ion-item>
+		</ion-list>
+
+		<div 
+			ng-if="Notes.errors"
+			class="errors">
+			<div
+				ng-repeat="msg in Notes.errors" 
+				class="messages">
+				{{ msg.text }}
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

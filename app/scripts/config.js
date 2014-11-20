@@ -4,7 +4,7 @@
 
 .constant("ENV", {
   "name": "development",
-  "apiEndpoint": "http://192.168.1.3:3000/"
+  "apiEndpoint": "http://127.0.0.1:9393/"
 })
 
 ;

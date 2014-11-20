@@ -1,10 +1,12 @@
 'use strict';
+/*global _: true */
+
 angular
 .module('NoteToSelf.services', [])
 .factory('NoteFactory', function(ENV, $http) {
 	var self = {
-		apiUrl 	: ENV.apiEndpoint +'notes',
-		items 	: []
+		apiUrl	: ENV.apiEndpoint +'notes',
+		items	: []
 	};
 
 	self.getAll = function() {
@@ -61,6 +63,19 @@ angular
 			data: note
 		}).success(function (response) {
 			console.log(response);
+		}).error(function (err) {
+			console.log(err);
+		});
+	};
+
+	self.search = function (query) {
+		return $http.get(self.apiUrl +'/search?q='+ query.q).success(function (response) {
+			if (response.error) {
+				self.searchResults = null;
+				return;
+			}
+
+			self.searchResults = response.data;
 		}).error(function (err) {
 			console.log(err);
 		});

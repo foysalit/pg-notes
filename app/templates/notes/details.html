@@ -19,5 +19,11 @@
 
 	<ion-content has-header="true" padding="true">
 		{{Notes.item.note}}
+
+		<div class="row images" ng-repeat="image in Notes.item.pictures">
+			<div class="col">
+				<img ng-src="data:image/jpeg;base64,{{image.data_uri}}">
+			</div>
+		</div>
 	</ion-content>
 </ion-view>
